@@ -1,4 +1,8 @@
 """
+2025-02-20
+hi again
+we back
+
 2024-12-05
 ADDED: get_users, add_users, get_events
 TODO: unfortunately need to HEAVILY reanalyze schema and redesign
@@ -15,7 +19,7 @@ import mariadb
 
 app = Flask(__name__)
 
-# TESTING CONFIG
+# TESTING CONFI47.0G
 db_config = {
         "user": "boochi", 
         "password": get_mariadb_test_pw(),         
@@ -72,8 +76,17 @@ def get_users():
         cursor.close()
         connection.close()
 
+# get specific user off user id
+@app.route("/users/<int:user_id>", methods=["GET"])
+def get_user(user_id):
+    connection = connect_db()
 
-# for now using `curl .....` to test
+    if connection is None:
+        return jsonify({"error": "Failed to connect to database"}), 500
+
+    cursor = connection.cursor()
+
+# add_users (using curl to test)
 @app.route("/users", methods=["POST"])
 def add_users():
     data = request.json
@@ -111,6 +124,8 @@ def add_users():
     finally:
         cursor.close()
         connection.close()
+
+# add update and delete for users 
 
 # -------- Events --------
 
@@ -184,6 +199,7 @@ def add_events():
         cursor.close()
         connection.close()
 
+# add update and delete for events
 
 if __name__ == '__main__':
     app.run(debug = True)
