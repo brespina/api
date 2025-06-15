@@ -279,7 +279,7 @@ class UserBase(BaseModel):
     password_hash: str
     first_name: str
     last_name: str
-    signup_date: datetime
+    signup_date: Optional[datetime] = None
 
 
 class UserCreate(UserBase):

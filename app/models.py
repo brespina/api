@@ -51,7 +51,7 @@ class Coordinator(Base):
     end_date = Column(DateTime, nullable=True)
 
     # relationships
-    user = relationship("User", back_populates="coordinator_roles")
+    user = relationship("User", back_populates="coordinators")
     game = relationship("Game", back_populates="coordinators")
 
     # constraints
@@ -167,7 +167,7 @@ class Membership(Base):
     # relationships
     user = relationship("User", back_populates="memberships")
     shirt_size = relationship("ShirtSize", back_populates="memberships")
-    team_memberships = relationship("TeamMembership", back_populates="memberships")
+    team_memberships = relationship("TeamMembership", back_populates="membership")
 
     # constraints
     __table_args__ = (
@@ -189,7 +189,7 @@ class Officer(Base):
     # relationships
     user = relationship("User", back_populates="officers")
     role = relationship("Role", back_populates="officers")
-    events_created = relationship("Event", back_populates="created_by_officer_id")
+    events_created = relationship("Event", back_populates="created_by_officer")
     uploaded_media = relationship("Media", back_populates="uploaded_by")
 
     # constraints
@@ -263,7 +263,10 @@ class TeamMembership(Base):
 
     # constraints
     __table_args__ = (
-        CheckConstraint("end_date is null or end_date > start_date", name="chk_dates"),
+        CheckConstraint(
+            "end_date is null or end_date > start_date",
+            name="chk_team_membership_dates",
+        ),
     )
 
 
@@ -295,7 +298,7 @@ class User(Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, index=True)
     email = Column(String(255), nullable=False, unique=True)
-    password = Column(String(255), nullable=False)
+    password_hash = Column(String(255), nullable=False)
     first_name = Column(String(30), nullable=False)
     last_name = Column(String(30), nullable=False)
     signup_date = Column(DateTime, nullable=False)
