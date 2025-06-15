@@ -2,10 +2,8 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Date,
     ForeignKey,
     DateTime,
-    Boolean,
     Enum,
     Text,
     LargeBinary,
@@ -30,8 +28,8 @@ class AcademicTerm(Base):
     __tablename__ = "academic_terms"
     term_id = Column(Integer, primary_key=True, index=True)
     semester = Column(String(20), nullable=False)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=False)
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=False)
 
     # relationships
     media = relationship("Media", back_populates="academic_term")
@@ -146,7 +144,7 @@ class Media(Base):
     academic_term_id = Column(
         Integer, ForeignKey("academic_terms.term_id"), nullable=False
     )
-    date_uploaded = Column(Date, nullable=False)
+    date_uploaded = Column(DateTime, nullable=False)
     uploaded_by_officer_id = Column(
         Integer, ForeignKey("officers.officer_id"), nullable=False
     )
@@ -184,8 +182,8 @@ class Officer(Base):
         Integer, ForeignKey("users.user_id", ondelete="CASCADE"), nullable=False
     )
     role_id = Column(Integer, ForeignKey("roles.role_id"), nullable=False)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=True)
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=True)
     officer_image = Column(LargeBinary, nullable=True)
 
     # relationships
@@ -238,8 +236,8 @@ class ShirtSize(Base):
 class Sponsor(Base):
     __tablename__ = "sponsors"
     sponsor_id = Column(Integer, primary_key=True, index=True)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date)
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime)
     sponsor_name = Column(String(100), nullable=False)
     sponsor_logo = Column(LargeBinary)
     sponsor_website = Column(String(255))
@@ -300,7 +298,7 @@ class User(Base):
     password = Column(String(255), nullable=False)
     first_name = Column(String(30), nullable=False)
     last_name = Column(String(30), nullable=False)
-    signup_date = Column(Date, nullable=False)
+    signup_date = Column(DateTime, nullable=False)
 
     # relationships
     coordinators = relationship("Coordinator", back_populates="user")

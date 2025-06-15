@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from datetime import date, datetime
+from datetime import datetime
 
 
 class AcademicTermBase(BaseModel):
     semester: str
-    start_date: date
-    end_date: date
+    start_date: datetime
+    end_date: datetime
 
 
 class AcademicTermCreate(AcademicTermBase):
@@ -116,7 +116,7 @@ class MediaBase(BaseModel):
     media_image: Optional[bytes] = None
     academic_term_id: int
     uploaded_by_officer_id: int
-    date_uploaded: date
+    date_uploaded: datetime
 
 
 class MediaCreate(MediaBase):
@@ -151,8 +151,8 @@ class MembershipRead(MembershipBase):
 class OfficerBase(BaseModel):
     user_id: int
     role_id: int
-    start_date: date
-    end_date: Optional[date] = None
+    start_date: datetime
+    end_date: Optional[datetime] = None
     officer_image: Optional[bytes] = None
 
 
@@ -279,7 +279,7 @@ class UserBase(BaseModel):
     password_hash: str
     first_name: str
     last_name: str
-    signup_date: date
+    signup_date: datetime
 
 
 class UserCreate(UserBase):
