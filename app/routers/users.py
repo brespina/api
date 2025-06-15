@@ -1,3 +1,14 @@
+"""
+Users are anyone who signs up. They can be members or not.
+Users:
+    - user_id int auto-increment primary key
+    - email varchar(255) unique not null
+    - password_hash varchar(255) not null
+    - first_name varchar(50) not null
+    - last_name varchar(50) not null
+    - signup_date date not null
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 

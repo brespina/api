@@ -1,10 +1,9 @@
 """
-Memberships:
-    - membership_id | int auto-increment primary key
-    - user_id | int not null
+AcademicTerms:
+    - term_id | int auto-increment primary key
+    - semester | varchar(20) not null
     - start_date | date not null
     - end_date | date not null
-    - shirt_size_id | int not null
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status

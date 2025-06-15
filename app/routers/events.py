@@ -1,3 +1,16 @@
+"""
+Events:
+    - event_id | int auto-increment primary key
+    - title | varchar(255) not null
+    - description | text not null
+    - location | varchar(255) not null
+    - date_time | datetime not null
+    - end_time | datetime not null
+    - attendance | int not null
+    - created_by_officer_id | int not null
+"""
+
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 

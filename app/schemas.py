@@ -48,6 +48,9 @@ class EventAttendeeCreate(EventAttendeeBase):
 
 
 class EventAttendeeRead(EventAttendeeBase):
+    user_id: int
+    event_id: int
+
     class Config:
         orm_mode = True
 
@@ -75,6 +78,7 @@ class EventRead(EventBase):
 
 class GameBase(BaseModel):
     game_name: str
+    bg_image: Optional[bytes] = None
 
 
 class GameCreate(GameBase):
@@ -196,24 +200,6 @@ class RoleRead(RoleBase):
         orm_mode = True
 
 
-class SponsorBase(BaseModel):
-    sponsor_name: str
-    start_date: datetime
-    end_date: Optional[datetime] = None
-    sponsor_logo: Optional[bytes] = None
-
-
-class SponsorCreate(SponsorBase):
-    pass
-
-
-class SponsorRead(SponsorBase):
-    sponsor_id: int
-
-    class Config:
-        orm_mode = True
-
-
 class ShirtSizeBase(BaseModel):
     size_name: Optional[str] = None
 
@@ -229,21 +215,40 @@ class ShirtSizeRead(ShirtSizeBase):
         orm_mode = True
 
 
-class UserBase(BaseModel):
-    email: str
-    first_name: str
-    last_name: str
-    phone_number: Optional[str] = None
-    discord_username: Optional[str] = None
-    profile_picture: Optional[bytes] = None
+class SponsorBase(BaseModel):
+    sponsor_name: str
+    start_date: datetime
+    end_date: Optional[datetime] = None
+    sponsor_logo: Optional[bytes] = None
+    sponsor_website: Optional[str] = None
 
 
-class UserCreate(UserBase):
+class SponsorCreate(SponsorBase):
     pass
 
 
-class UserRead(UserBase):
-    user_id: int
+class SponsorRead(SponsorBase):
+    sponsor_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class TeamMembershipBase(BaseModel):
+    team_id: int
+    membership_id: int
+    player_image: Optional[bytes] = None
+    start_date: datetime
+    end_date: Optional[datetime] = None
+
+
+class TeamMembershipCreate(TeamMembershipBase):
+    pass
+
+
+class TeamMembershipRead(TeamMembershipBase):
+    team_id: int
+    membership_id: int
 
     class Config:
         orm_mode = True
@@ -252,7 +257,10 @@ class UserRead(UserBase):
 class TeamBase(BaseModel):
     team_name: str
     game_id: int
-    team_logo: Optional[bytes] = None
+    coordinator_id: int
+    achievements: Optional[str] = None
+    wins: int
+    losses: int
 
 
 class TeamCreate(TeamBase):
@@ -266,17 +274,20 @@ class TeamRead(TeamBase):
         orm_mode = True
 
 
-class TeamMembershipBase(BaseModel):
-    user_id: int
-    team_id: int
-    start_date: datetime
-    end_date: Optional[datetime] = None
+class UserBase(BaseModel):
+    email: str
+    password_hash: str
+    first_name: str
+    last_name: str
+    signup_date: date
 
 
-class TeamMembershipCreate(TeamMembershipBase):
+class UserCreate(UserBase):
     pass
 
 
-class TeamMembershipRead(TeamMembershipBase):
+class UserRead(UserBase):
+    user_id: int
+
     class Config:
         orm_mode = True

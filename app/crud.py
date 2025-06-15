@@ -55,7 +55,26 @@ class CRUDBase(Generic[ModelType, CreateSchemaType]):
 
 
 # Create CRUD instances for each model
-user = CRUDBase[models.User, schemas.UserCreate](models.User)
-game = CRUDBase[models.Game, schemas.GameCreate](models.Game)
+academic_term = CRUDBase[models.AcademicTerm, schemas.AcademicTermCreate](models.AcademicTerm)
+coordinator = CRUDBase[models.Coordinator, schemas.CoordinatorCreate](models.Coordinator)
+event_attendee = CRUDBase[models.EventAttendee, schemas.EventAttendeeCreate](models.EventAttendee)
 event = CRUDBase[models.Event, schemas.EventCreate](models.Event)
+game = CRUDBase[models.Game, schemas.GameCreate](models.Game)
+match = CRUDBase[models.Match, schemas.MatchCreate](models.Match)
+media = CRUDBase[models.Media, schemas.MediaCreate](models.Media)
+membership = CRUDBase[models.Membership, schemas.MembershipCreate](models.Membership)
+officer = CRUDBase[models.Officer, schemas.OfficerCreate](models.Officer)
+opponent = CRUDBase[models.Opponent, schemas.OpponentCreate](models.Opponent)
+role = CRUDBase[models.Role, schemas.RoleCreate](models.Role)
+shirt_size = CRUDBase[models.ShirtSize, schemas.ShirtSizeCreate](models.ShirtSize)
+sponsor = CRUDBase[models.Sponsor, schemas.SponsorCreate](models.Sponsor)
+team_membership = CRUDBase[models.TeamMembership, schemas.TeamMembershipCreate](models.TeamMembership)
+team = CRUDBase[models.Team, schemas.TeamCreate](models.Team)
+user = CRUDBase[models.User, schemas.UserCreate](models.User)
+
+
+
+
+
+
 
