@@ -12,3 +12,4 @@ boochi_schema.png
 boochi_*.*
 
 .env
+**/.env
